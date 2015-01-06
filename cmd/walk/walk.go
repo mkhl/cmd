@@ -12,7 +12,7 @@ import (
 var (
 	dirs  = []string{"."}
 	all   = flag.Bool("a", false, "include files whose names begin with a dot")
-	depth = flag.Int("d", 0, "descend at most <depth> directory levels")
+	depth = flag.Uint("d", 0, "descend at most <depth> directory levels")
 	quote = flag.Bool("q", false, "print file names as double-quoted strings")
 )
 
@@ -25,14 +25,6 @@ func main() {
 		if err := walk(filepath.Clean(path)); err != nil {
 			log.Fatal(err)
 		}
-	}
-}
-
-func print(path string) {
-	if *quote {
-		fmt.Printf("%q\n", path)
-	} else {
-		fmt.Println(path)
 	}
 }
 
@@ -62,11 +54,15 @@ func walk(root string) error {
 			if err != nil {
 				return err
 			}
-			if *depth > 0 && len(strings.Split(rel, "/")) > *depth {
+			if uint(len(strings.Split(rel, "/"))) > *depth {
 				return skip(info)
 			}
 		}
-		print(path)
+		if *quote {
+			fmt.Printf("%q\n", path)
+		} else {
+			fmt.Println(path)
+		}
 		return nil
 	})
 }
