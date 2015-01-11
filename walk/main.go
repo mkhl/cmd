@@ -1,3 +1,22 @@
+/*
+Walk walks a filesystem hierarchy and prints the name of every file it encounters.
+
+Usage:
+
+	walk [options] [paths]
+
+The flags are:
+
+	-a
+		include files whose names begin with a dot
+	-d depth
+		descend at most depth directory levels
+	-q
+		print file names as quoted strings
+
+Each argument is interpreted as a path to walk.
+If no arguments are present, walks the current working directory.
+*/
 package main
 
 import (
@@ -10,18 +29,25 @@ import (
 )
 
 var (
-	dirs  = []string{"."}
+	paths = []string{"."}
 	all   = flag.Bool("a", false, "include files whose names begin with a dot")
 	depth = flag.Uint("d", 0, "descend at most <depth> directory levels")
-	quote = flag.Bool("q", false, "print file names as double-quoted strings")
+	quote = flag.Bool("q", false, "print file names as quoted strings")
 )
 
 func main() {
+	log.SetFlags(0)
+	log.SetPrefix("walk: ")
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "usage: walk [flags] [paths]\n")
+		flag.PrintDefaults()
+		os.Exit(2)
+	}
 	flag.Parse()
 	if flag.NArg() > 0 {
-		dirs = flag.Args()
+		paths = flag.Args()
 	}
-	for _, path := range dirs {
+	for _, path := range paths {
 		if err := walk(filepath.Clean(path)); err != nil {
 			log.Fatal(err)
 		}

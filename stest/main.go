@@ -56,6 +56,8 @@ var (
 )
 
 func main() {
+	log.SetFlags(0)
+	log.SetPrefix("stest: ")
 	flag.Parse()
 	if flag.NFlag() == 0 {
 		flag.Usage()
