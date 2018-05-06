@@ -58,20 +58,21 @@ type flagTest struct {
 type testFunc func(info os.FileInfo) bool
 
 var (
-	L = flag.Bool("L", false, "Matches files that are symbolic links")
-	S = flag.Bool("S", false, "Matches files that are sockets")
-	d = flag.Bool("d", false, "Matches files that are directories")
-	e = flag.Bool("e", false, "Matches files that exist (regardless of type)")
-	f = flag.Bool("f", false, "Matches files that are regular files")
-	g = flag.Bool("g", false, "Matches files whose set group ID flag is set")
-	k = flag.Bool("k", false, "Matches files whose sticky bit is set")
-	p = flag.Bool("p", false, "Matches files that are named pipes (FIFOs)")
-	r = flag.Bool("r", false, "Matches files that are readable")
-	s = flag.Bool("s", false, "Matches files that have a size greater than zero")
-	u = flag.Bool("u", false, "Matches files whose set user ID flag is set")
-	v = flag.Bool("v", false, "Invert the sense of matching, to select non-matching files")
-	w = flag.Bool("w", false, "Matches files that are writable")
-	x = flag.Bool("x", false, "Matches files that are executable")
+	this = os.Args[0]
+	L    = flag.Bool("L", false, "Matches files that are symbolic links")
+	S    = flag.Bool("S", false, "Matches files that are sockets")
+	d    = flag.Bool("d", false, "Matches files that are directories")
+	e    = flag.Bool("e", false, "Matches files that exist (regardless of type)")
+	f    = flag.Bool("f", false, "Matches files that are regular files")
+	g    = flag.Bool("g", false, "Matches files whose set group ID flag is set")
+	k    = flag.Bool("k", false, "Matches files whose sticky bit is set")
+	p    = flag.Bool("p", false, "Matches files that are named pipes (FIFOs)")
+	r    = flag.Bool("r", false, "Matches files that are readable")
+	s    = flag.Bool("s", false, "Matches files that have a size greater than zero")
+	u    = flag.Bool("u", false, "Matches files whose set user ID flag is set")
+	v    = flag.Bool("v", false, "Invert the sense of matching, to select non-matching files")
+	w    = flag.Bool("w", false, "Matches files that are writable")
+	x    = flag.Bool("x", false, "Matches files that are executable")
 
 	tests = []statTests{
 		{os.Lstat, []flagTest{
@@ -97,6 +98,10 @@ var (
 func main() {
 	log.SetFlags(0)
 	log.SetPrefix("stest: ")
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "usage: %s <option>...\n", this)
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 	if flag.NFlag() == 0 {
 		flag.Usage()

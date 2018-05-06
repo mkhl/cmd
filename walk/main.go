@@ -30,6 +30,7 @@ import (
 )
 
 var (
+	this  = os.Args[0]
 	paths = []string{"."}
 	all   = flag.Bool("a", false, "include files whose names begin with a dot")
 	depth = flag.Uint("d", 0, "descend at most <depth> directory levels")
@@ -40,9 +41,8 @@ func main() {
 	log.SetFlags(0)
 	log.SetPrefix("walk: ")
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "usage: walk [flags] [paths]\n")
+		fmt.Fprintf(os.Stderr, "usage: %s [<option>...] [<path>...]\n", this)
 		flag.PrintDefaults()
-		os.Exit(2)
 	}
 	flag.Parse()
 	if flag.NArg() > 0 {
