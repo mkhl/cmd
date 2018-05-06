@@ -103,7 +103,7 @@ func main() {
 		flag.PrintDefaults()
 	}
 	flag.Parse()
-	if flag.NFlag() == 0 {
+	if flag.NFlag() == 0 || flag.NArg() > 0 {
 		flag.Usage()
 		os.Exit(2)
 	}
