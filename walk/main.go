@@ -1,11 +1,12 @@
 /*
-Walk walks a filesystem hierarchy and prints the name of every file it encounters.
+Walk walks a filesystem hierarchy
+and prints the name of every file it encounters.
 
 Usage:
 
-	walk [options] [paths]
+	walk [<option>...] [<path>...]
 
-The flags are:
+The options are:
 
 	-a
 		include files whose names begin with a dot

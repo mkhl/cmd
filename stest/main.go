@@ -1,3 +1,42 @@
+/*
+Stest tests reads files from stdin (one per line)
+and prints every file that passes all given tests.
+
+Usage:
+
+	stest <option>...
+
+The options are:
+
+	-L
+		Matches files that are symbolic links
+	-S
+		Matches files that are sockets
+	-d
+		Matches files that are directories
+	-e
+		Matches files that exist (regardless of type)
+	-f
+		Matches files that are regular files
+	-g
+		Matches files whose set group ID flag is set
+	-k
+		Matches files whose sticky bit is set
+	-p
+		Matches files that are named pipes (FIFOs)
+	-r
+		Matches files that are readable
+	-s
+		Matches files that have a size greater than zero
+	-u
+		Matches files whose set user ID flag is set
+	-w
+		Matches files that are writable
+	-x
+		Matches files that are executable
+	-v
+		Invert the sense of matching, to select non-matching files
+*/
 package main
 
 import (
