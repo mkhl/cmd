@@ -112,9 +112,9 @@ func open() error {
 }
 
 func run(name string, args []string, stdin []byte) ([]byte, []byte, error) {
-
 	var stdout, stderr bytes.Buffer
 	cmd := exec.Command(name, args...)
+	cmd.Stdin = os.Stdin
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 	err := cmd.Run()
