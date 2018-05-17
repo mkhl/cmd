@@ -102,10 +102,13 @@ func writeErrors(winid int, buf []byte) error {
 
 func dir(event acme.LogEvent) string {
 	name := event.Name
-	if strings.HasSuffix(name, "/") {
-		return name
+	if !strings.HasSuffix(name, "/") {
+		name = path.Dir(name)
 	}
-	return path.Dir(name)
+	if _, err := os.Stat(name); err != nil {
+		return ""
+	}
+	return name
 }
 
 func env(event acme.LogEvent) []string {
