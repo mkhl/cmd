@@ -65,9 +65,6 @@ func main() {
 	log.SetPrefix(fmt.Sprintf("%s: ", this))
 	flag.Usage = usage
 	flag.Parse()
-	if flag.NArg() == 0 {
-		usage()
-	}
 	if err := cli(flag.Args()); err != nil {
 		switch e := err.(type) {
 		case *exec.ExitError: // command failed
@@ -88,7 +85,7 @@ func cli(args []string) error {
 	if err != nil {
 		return err
 	}
-	stdout, stderr, exit := run(args[0], args[1:], body)
+	stdout, stderr, exit := run(args, body)
 	if err := writeErrors(stderr); err != nil {
 		return err
 	}
@@ -111,9 +108,12 @@ func open() error {
 	return err
 }
 
-func run(name string, args []string, stdin []byte) ([]byte, []byte, error) {
+func run(args []string, stdin []byte) ([]byte, []byte, error) {
+	if len(args) == 0 {
+		return stdin, nil, nil
+	}
 	var stdout, stderr bytes.Buffer
-	cmd := exec.Command(name, args...)
+	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
