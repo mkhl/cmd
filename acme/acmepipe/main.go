@@ -85,7 +85,7 @@ func cli(args []string) error {
 	if err != nil {
 		return err
 	}
-	stdout, stderr, exit := run(args, body)
+	stdout, stderr, exit := run(args)
 	if err := writeErrors(stderr); err != nil {
 		return err
 	}
@@ -108,9 +108,10 @@ func open() error {
 	return err
 }
 
-func run(args []string, stdin []byte) ([]byte, []byte, error) {
+func run(args []string) ([]byte, []byte, error) {
 	if len(args) == 0 {
-		return stdin, nil, nil
+		stdin, err := ioutil.ReadAll(os.Stdin)
+		return stdin, nil, err
 	}
 	var stdout, stderr bytes.Buffer
 	cmd := exec.Command(args[0], args[1:]...)
