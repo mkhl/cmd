@@ -222,13 +222,13 @@ func applyRegion(line string, buf []byte) error {
 	}
 	i := strings.IndexAny(line, "acd")
 	if i < 0 {
-		log.Println("cannot parse diff: %q", line)
+		log.Println("cannot parse diff:", line)
 		return nil
 	}
 	n1, n2 := span(line[:i])
 	n3, n4 := span(line[i+1:])
 	if n1 == 0 || n3 == 0 {
-		log.Println("cannot parse diff: %q", line)
+		log.Println("cannot parse diff:", line)
 		return nil
 	}
 	switch line[i] {
