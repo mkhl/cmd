@@ -206,45 +206,8 @@ func apply(diff, buf []byte) error {
 	lines := strings.Split(string(diff), "\n")
 	for i := len(lines) - 1; i >= 0; i-- {
 		line := lines[i]
-		if len(line) == 0 {
-			continue
-		}
-		if line[0] == '<' || line[0] == '-' || line[0] == '>' {
-			continue
-		}
-		j := strings.IndexAny(line, "acd")
-		if j < 0 {
-			log.Println("cannot parse diff: %q", line)
-			continue
-		}
-		n1, n2 := span(line[:j])
-		n3, n4 := span(line[j+1:])
-		if n1 == 0 || n3 == 0 {
-			log.Println("cannot parse diff: %q", line)
-			continue
-		}
-		switch line[j] {
-		case 'a': // add
-			if err := win.Addr("%d+#0", n1); err != nil {
-				return err
-			}
-			if _, err := win.Write("data", region(buf, n3, n4)); err != nil {
-				return err
-			}
-		case 'c': // change
-			if err := win.Addr("%d,%d", n1, n2); err != nil {
-				return err
-			}
-			if _, err := win.Write("data", region(buf, n3, n4)); err != nil {
-				return err
-			}
-		case 'd': // delete
-			if err := win.Addr("%d,%d", n1, n2); err != nil {
-				return err
-			}
-			if _, err := win.Write("data", nil); err != nil {
-				return err
-			}
+		if err := applyRegion(line, buf); err != nil {
+			return err
 		}
 	}
 	return nil
