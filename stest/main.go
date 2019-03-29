@@ -1,5 +1,5 @@
 /*
-Stest tests reads files from stdin (one per line)
+Stest reads files from stdin (one per line)
 and prints every file that passes all given tests.
 
 Usage:

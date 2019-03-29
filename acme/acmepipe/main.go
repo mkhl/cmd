@@ -6,7 +6,7 @@ and writes messages from its stderr to the window's errors file.
 
 Usage:
 
-	acmepipe [<option>...] <command> [<argument>...]
+	acmepipe [<option>...] [<command> [<argument>...]]
 
 The options are:
 
@@ -14,6 +14,8 @@ The options are:
 		replace the body all at once
 	-mark
 		mark each changed region as a separate undo step
+
+Without a command, acmepipe uses its stdin as the output instead.
 
 Acmepipe draws inspiration from
 github.com/9fans/acme/acmego,
