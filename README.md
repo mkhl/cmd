@@ -11,8 +11,8 @@ Miscellaneous command-line tools
 
 	I use it with [a script like this one][on-acme-event].
 
-[walk]: https://godoc.org/git.sr.ht/~mkhl/cmd/walk
-[stest]: https://godoc.org/git.sr.ht/~mkhl/cmd/stest
-[acmepipe]: https://godoc.org/git.sr.ht/~mkhl/cmd/acme/acmepipe
-[autoacme]: https://godoc.org/git.sr.ht/~mkhl/cmd/acme/autoacme
-[on-acme-event]: https://paste.sr.ht/~mkhl/458217c48b978a71082c3251dcdd2c545d3b64db
+[walk]: https://godoc.org/github.com/mkhl/cmd/walk
+[stest]: https://godoc.org/github.com/mkhl/cmd/stest
+[acmepipe]: https://godoc.org/github.com/mkhl/cmd/acme/acmepipe
+[autoacme]: https://godoc.org/github.com/mkhl/cmd/acme/autoacme
+[on-acme-event]: https://gist.github.com/mkhl/69e2be41bfeccb368b52818ebd7f535b#file-on-acme-event
