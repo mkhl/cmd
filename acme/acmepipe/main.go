@@ -53,7 +53,7 @@ type thing struct {
 }
 
 func usage() {
-	usage := `usage: %s [<option>...] <command> [<argument>...]
+	usage := `usage: %s [<option>...] [<command> [<argument>...]]
 Execute <command>, replace acme/$winid/body with its output,
 and write diagnostic messages to acme/$winid/errors.
 `

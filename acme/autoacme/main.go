@@ -31,7 +31,8 @@ var (
 func usage() {
 	usage := `usage: %s <command> [<argument>...]
 Watch acme/log for events and execute <command> for each,
-setting $winid and passing the operation and target as arguments.`
+setting $winid and passing the operation and target as arguments.
+`
 	fmt.Fprintf(os.Stderr, usage, this)
 	flag.PrintDefaults()
 	os.Exit(2)
