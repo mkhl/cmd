@@ -18,7 +18,7 @@ These scripts in turn use `acmeeval` and `acmepipe`.
 
 [walk]: https://godoc.org/github.com/mkhl/cmd/walk
 [stest]: https://godoc.org/github.com/mkhl/cmd/stest
-[acmepipe]: https://godoc.org/github.com/mkhl/cmd/acme/acmeeval
+[acmeeval]: https://godoc.org/github.com/mkhl/cmd/acme/acmeeval
 [acmepipe]: https://godoc.org/github.com/mkhl/cmd/acme/acmepipe
 [autoacme]: https://godoc.org/github.com/mkhl/cmd/acme/autoacme
 [acme-autoformat]: https://gist.github.com/mkhl/69e2be41bfeccb368b52818ebd7f535b#file-acme-autoformat
