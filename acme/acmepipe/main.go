@@ -229,10 +229,6 @@ func applyRegion(line string, buf []byte) error {
 	}
 	n1, n2 := span(line[:i])
 	n3, n4 := span(line[i+1:])
-	if n1 == 0 || n3 == 0 {
-		log.Println("cannot parse diff:", line)
-		return nil
-	}
 	switch line[i] {
 	case 'a': // add
 		if err := write(region(buf, n3, n4), "%d+#0", n1); err != nil {
