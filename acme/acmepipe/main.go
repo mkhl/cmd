@@ -170,10 +170,12 @@ func patchOutput(old, new []byte) error {
 	if err != nil {
 		return err
 	}
+	defer os.Remove(newFile.Name())
 	oldFile, err := tempfile(old)
 	if err != nil {
 		return err
 	}
+	defer os.Remove(oldFile.Name())
 	var stdout, stderr bytes.Buffer
 	cmd := exec.Command("9", "diff", oldFile.Name(), newFile.Name())
 	cmd.Stdout = &stdout
